@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<script type="text/javascript" src="./assets/javascript/game.js"></script>
+	<title>Vaporwave Hangman</title>
+</head>
+
+<body>
+
+<h1>VAPORWAVE<br>HANGMAN</h1>
+<div>Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
+<div>Chances left: <span id="chancesDisplay">5</span></div>
+
+<script>
+	//Set target word that the player is trying to guess.
+	var targetWord = "vaporwave";
+	var targetWordLetterTotal = targetWord.length
+
+	//Set the array into which the user's guessed letters will be stored.
+	var guessedLettersArray = [];
+
+	//Set the initial number of chances (incorrect guesses) the user is allowed.
+	var tracker = 5;
+
+	//Get elements from html to display the user's guessed letters and their remaining chances.
+	var guessedLetters = document.getElementById("guessesDisplay");
+	var trackerDisplay = document.getElementById("chancesDisplay");
+	
+
+	var blankWordObject = {};
+	var blankWordArray = [];
+	
+	document.onkeydown = function(event) {
+		
+		//Set User's latest guess to their key press
+    	var latestGuessedLetter = event.key;
+
+    	//Check to see if user input is a letter before moving on.
+    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+
+    		/*Call pushAndPrintString function to take in the letter.
+    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
+    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
+
+    		//Call indicesOfLetterInWord to save the indices of the guessed letter within the target word.
+    		var indicesOfLetterInWord = checkLetterInWord(latestGuessedLetter, targetWord);
+
+    		//If guessed letter isn't in the target word, decrease chances and display new total on the page.
+    		if (indicesOfLetterInWord === undefined){
+    			tracker--;
+    			trackerDisplay.textContent = tracker;
+    		}
+    		
+
+    		
+		}
+
+		//Display alert message if user input is not a letter.
+    	else {
+    		alert("LETTERS ONLY, PLEASE");
+    	}
+	}
+	
+
+</script>
+
+</body>
+
+</html>
