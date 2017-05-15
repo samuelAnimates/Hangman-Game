@@ -3,78 +3,97 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 	<title>Vaporwave Hangman</title>
 </head>
 
-<body>
+<body class="bg-beach-wallpaper">
 
-<h1>VAPORWAVE<br>HANGMAN</h1>
-<div>Target word: <span id="targetWordDisplay"> </span></div>
-<div>Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
-<div>Chances left: <span id="chancesDisplay">5</span></div>
+	<div class="margin-auto margintop-60px width-85-pct">
 
-<script>
-	//Set target word that the player is trying to guess.
-	var targetWord = "vaporwave";
-	var targetWordLetterTotal = targetWord.length
+		<div class="margin-auto width-85-pct">
+			<aside class = "flt-lft width-50-pct">
+				<div class="bg-color-blue color-white width-100-pct">Game Title</div>
+				<div class="bg-color-grey width-100-pct">VAPORWAVE HANGMAN</div>
+			</aside>
 
-	//Get elements from html to display the user's guessed letters, and remaining chances.
-	var guessedLetters = document.getElementById("guessesDisplay");
-	var trackerPrint = document.getElementById("chancesDisplay");
+			<aside class="flt-rt marginbottom-60px width-30-pct">
+				<div class="bg-color-blue color-white width-100-pct">Instructions</div>
+				<div class="bg-color-grey width-100-pct">Instructions</div>
+			</aside>
+		</div>
 
-	//Set and fill an array with empty letter spaces to be filled in by the user, and display tit onscreen.
-	var targetWordArray = [];
-	var targetWordArrayPrint = document.getElementById("targetWordDisplay");
-	for (i = 0; i < targetWordLetterTotal; i++){
-		targetWordArray.push(" _ ")
-	}
-	targetWordArrayPrint.textContent = targetWordArray.join("");
-	
-	
-	//Set the array into which the user's guessed letters will be stored.
-	var guessedLettersArray = [];
+		<main class="clear-floats margin-auto width-85-pct">
+			<div class="bg-color-blue color-white width-100-pct">Instructions</div>
+			<div class="bg-color-black color-white">Target word: <span id="targetWordDisplay"> </span></div>
+			<div class="bg-color-black color-white">Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
+			<div class="bg-color-black color-white">Chances left: <span id="chancesDisplay">5</span></div>
+		</main>
 
-	//Set the initial number of chances (incorrect guesses) the user is allowed.
-	var tracker = 5;
+	</div>
 
-	
+	<script>
+		//Set target word that the player is trying to guess.
+		var targetWord = "vaporwave";
+		var targetWordLetterTotal = targetWord.length
 
-	document.onkeydown = function(event) {
-		
-		//Set User's latest guess to their key press
-    	var latestGuessedLetter = event.key;
+		//Get elements from html to display the user's guessed letters, and remaining chances.
+		var guessedLetters = document.getElementById("guessesDisplay");
+		var trackerPrint = document.getElementById("chancesDisplay");
 
-    	//Check to see if user input is a letter before moving on.
-    	if (event.keyCode >= 65 && event.keyCode <= 90) {
-
-    		/*Call pushAndPrintString function to take in the letter.
-    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
-    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
-
-    		//Call indicesOfLetterInWord to save the indices of the guessed letter within the target word.
-    		var indicesAndTargetWordObject = checkLetterInWord(latestGuessedLetter, targetWord, targetWordArray);
-
-    		//If guessed letter isn't in the target word, decrease chances and display new total on the page.
-    		if (indicesAndTargetWordObject.letterNumber < 0) {
-    			tracker--;
-    			trackerPrint.textContent = tracker;
-    		}
-
-    		else {
-    			targetWordArrayPrint.textContent = targetWordArray.join("");
-    		}
-    		
+		//Set and fill an array with empty letter spaces to be filled in by the user, and display tit onscreen.
+		var targetWordArray = [];
+		var targetWordArrayPrint = document.getElementById("targetWordDisplay");
+		for (i = 0; i < targetWordLetterTotal; i++){
+			targetWordArray.push(" _ ")
 		}
+		targetWordArrayPrint.textContent = targetWordArray.join("");
+		
+		
+		//Set the array into which the user's guessed letters will be stored.
+		var guessedLettersArray = [];
 
-		//Display alert message if user input is not a letter.
-    	else {
-    		alert("LETTERS ONLY, PLEASE");
-    	}
-	}
-	
+		//Set the initial number of chances (incorrect guesses) the user is allowed.
+		var tracker = 5;
 
-</script>
+		
+
+		document.onkeydown = function(event) {
+			
+			//Set User's latest guess to their key press
+	    	var latestGuessedLetter = event.key;
+
+	    	//Check to see if user input is a letter before moving on.
+	    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+
+	    		/*Call pushAndPrintString function to take in the letter.
+	    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
+	    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
+
+	    		//Call indicesOfLetterInWord to save the indices of the guessed letter within the target word.
+	    		var indicesAndTargetWordObject = checkLetterInWord(latestGuessedLetter, targetWord, targetWordArray);
+
+	    		//If guessed letter isn't in the target word, decrease chances and display new total on the page.
+	    		if (indicesAndTargetWordObject.letterNumber < 0) {
+	    			tracker--;
+	    			trackerPrint.textContent = tracker;
+	    		}
+
+	    		else {
+	    			targetWordArrayPrint.textContent = targetWordArray.join("");
+	    		}
+	    		
+			}
+
+			//Display alert message if user input is not a letter.
+	    	else {
+	    		alert("LETTERS ONLY, PLEASE");
+	    	}
+		}
+		
+
+	</script>
 
 </body>
 
