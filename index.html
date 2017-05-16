@@ -5,47 +5,67 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
+	<!-- On-theme dictionary file consisting only of an array named "dictionary" -->
+	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>
 	<title>Vaporwave Hangman</title>
 </head>
 
 <body class="bg-beach-wallpaper">
-
+	<!-- Container for the whole page body  -->
 	<div class="margin-auto margintop-60px width-85-pct">
 
+		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-85-pct">
-			<aside class = "flt-lft width-50-pct">
+			<aside class = "brdr-2px brdr-outset-grey flt-lft outsetborder-grey width-50-pct">
 				<div class="bg-color-blue color-white width-100-pct">Game Title</div>
 				<div class="bg-color-grey width-100-pct">VAPORWAVE HANGMAN</div>
 			</aside>
 
-			<aside class="flt-rt marginbottom-60px width-30-pct">
-				<div class="bg-color-blue color-white width-100-pct">Instructions</div>
+			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-60px outsetborder-grey width-30-pct">
+				<div class="bg-color-blue color-white width-100-pct">Did you know...</div>
 				<div class="bg-color-grey width-100-pct">Instructions</div>
 			</aside>
 		</div>
 
-		<main class="clear-floats margin-auto width-85-pct">
+		<!-- Container for the main game window -->
+		<main class="brdr-2px brdr-outset-grey clear-floats margin-auto width-85-pct">
 			<div class="bg-color-blue color-white width-100-pct">Instructions</div>
 			<div class="bg-color-black color-white">Target word: <span id="targetWordDisplay"> </span></div>
 			<div class="bg-color-black color-white">Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
 			<div class="bg-color-black color-white">Chances left: <span id="chancesDisplay">5</span></div>
 		</main>
 
+		<!-- Error PopUp -->
+		<div id="myPopUp" class="popUp">
+			<div class="popUpContent">
+				<span class="popUpClose">&times;</span>
+				<p id="popUpMessage"> </p>
+			</div>
+		</div>
+
 	</div>
 
+	<footer class="bg-color-grey height-30-px position-fixed-bottom width-100-pct"> 1</footer>
+
 	<script>
-		//Set target word that the player is trying to guess.
-		var targetWord = "vaporwave";
-		var targetWordLetterTotal = targetWord.length
+		//Set target word that the player is trying to guess.		
+		var targetWord = dictionary[getRandomIntInclusive(0, (dictionary.length - 1))];
+		console.log(targetWord);
 
 		//Get elements from html to display the user's guessed letters, and remaining chances.
 		var guessedLetters = document.getElementById("guessesDisplay");
 		var trackerPrint = document.getElementById("chancesDisplay");
 
-		//Set and fill an array with empty letter spaces to be filled in by the user, and display tit onscreen.
+		//Set and fill an array with empty letter spaces to be filled in by the user, and display it onscreen.
 		var targetWordArray = [];
 		var targetWordArrayPrint = document.getElementById("targetWordDisplay");
-		for (i = 0; i < targetWordLetterTotal; i++){
+
+		//Prepare pop-up window
+		var popUpWindow = document.getElementById("myPopUp");
+		var span = document.getElementsByClassName("popUpClose")[0];
+		var popUpText = document.getElementById("popUpMessage");
+
+		for (i = 0; i < targetWord.length; i++){
 			targetWordArray.push(" _ ")
 		}
 		targetWordArrayPrint.textContent = targetWordArray.join("");
@@ -57,39 +77,55 @@
 		//Set the initial number of chances (incorrect guesses) the user is allowed.
 		var tracker = 5;
 
-		
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		    popUpWindow.style.display = "none";
+		}		
 
 		document.onkeydown = function(event) {
-			
-			//Set User's latest guess to their key press
-	    	var latestGuessedLetter = event.key;
+			var latestGuessedLetter = event.key;
+		    	//Check to see if user input is a letter before moving on.
+		    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+		    		//Check to see if the user has already lost, display error message and break out of loop
+		    		if(tracker === 0){
+		    			popUpText.textContent = ("ＹＯＵ ＡＬＲＥＡＤＹ ＬＯＳＴ");
+		    			popUpWindow.style.display = "block";
+		    			return;
+		    		}
+		    		/*Call pushAndPrintString function to take in the letter.
+		    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
+		    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
 
-	    	//Check to see if user input is a letter before moving on.
-	    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+		    		//Call indicesOfLetterInWord to save the indices of the guessed letter within the target word.
+		    		var indicesAndTargetWordObject = checkLetterInWord(latestGuessedLetter, targetWord, targetWordArray);
 
-	    		/*Call pushAndPrintString function to take in the letter.
-	    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
-	    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
+		    		//If guessed letter isn't in the target word, decrease chances and display new total on the page.
+		    		if (indicesAndTargetWordObject.letterNumber < 0) {
+		    			tracker--;
+		    			trackerPrint.textContent = tracker;
+		    		}
+		    		
+		    		//Otherwise, print the new contents of the target word array	
+		    		else{
+		    			targetWordArrayPrint.textContent = targetWordArray.join("");
+		    		}
 
-	    		//Call indicesOfLetterInWord to save the indices of the guessed letter within the target word.
-	    		var indicesAndTargetWordObject = checkLetterInWord(latestGuessedLetter, targetWord, targetWordArray);
+		    		//Check if user has run out of chances. If so, alert losing message and break out.
+	    			if(tracker === 0){
+	    				popUpText.textContent = ("ＹＯＵ ＬＯＳＴ");
+		    			popUpWindow.style.display = "block";
+	    				return;
+	    			}
+				}
 
-	    		//If guessed letter isn't in the target word, decrease chances and display new total on the page.
-	    		if (indicesAndTargetWordObject.letterNumber < 0) {
-	    			tracker--;
-	    			trackerPrint.textContent = tracker;
-	    		}
+				//Display alert message if user input is not a letter.
+		    	else {
+		    		popUpText.textContent = ("ＬＥＴＴＥＲＳ　ＯＮＬＹ　，　ＰＬＥＡＳＥ");
+		    		popUpWindow.style.display = "block";
+		    		return;
+		    	}
 
-	    		else {
-	    			targetWordArrayPrint.textContent = targetWordArray.join("");
-	    		}
-	    		
-			}
 
-			//Display alert message if user input is not a letter.
-	    	else {
-	    		alert("LETTERS ONLY, PLEASE");
-	    	}
 		}
 		
 

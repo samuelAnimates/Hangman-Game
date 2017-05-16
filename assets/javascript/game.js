@@ -1,3 +1,10 @@
+//function that picks a random integer between min and max (inclusive)
+function getRandomIntInclusive(min, max) {
+        	min = Math.ceil(min);
+        	max = Math.floor(max);
+        	return Math.floor(Math.random() * (max - min + 1)) + min;
+      	}
+
 //funtion loops through word and returns each index that the letter occupies. Returns a value of -1 for letterNumber if letter is not in word.
 function checkLetterInWord(letter, word, wordArray){
 	var result = {

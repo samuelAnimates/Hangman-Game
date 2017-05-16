@@ -1,4 +1,8 @@
 
+* {
+  box-sizing: border-box;
+}
+
 .blinking-cursor {
   font-weight: 100;
   font-size: 30px;
@@ -71,6 +75,15 @@
   background-color: #c0c0c0;
 }
 
+.brdr-2px {
+border-width: 2px;
+}
+
+.brdr-outset-grey{
+  border-style: outset;
+  border-color: #BFB8BF;
+}
+
 .clear-floats{
   clear: both;
 }
@@ -87,6 +100,10 @@
   float: right;
 } 
 
+.height-30-px{
+  height: 30px;
+}
+
 .margin-auto{
   margin: auto;
 }
@@ -97,6 +114,44 @@
 
 .margintop-60px{
   margin-top: 60px;
+}
+
+.popUp {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0);
+}
+
+.popUpClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.popUpClose:hover,
+.popUpClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.popUpContent {
+    background-color: #fefefe;
+    margin: 40% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.position-fixed-bottom{
+  position: fixed;
+  bottom: 0;
 }
 
 .width-20-pct{
