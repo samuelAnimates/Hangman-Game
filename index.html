@@ -12,7 +12,7 @@
 
 <body class="bg-beach-wallpaper">
 	<!-- Container for the whole page body  -->
-	<div class="margin-auto margintop-60px width-85-pct">
+	<div class="margin-auto margintop-40px width-85-pct">
 
 		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-85-pct">
@@ -21,7 +21,7 @@
 				<div class="bg-color-grey width-100-pct">VAPORWAVE HANGMAN</div>
 			</aside>
 
-			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-60px outsetborder-grey width-30-pct">
+			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-40px outsetborder-grey width-30-pct">
 				<div class="bg-color-blue color-white width-100-pct">Did you know...</div>
 				<div class="bg-color-grey width-100-pct">Instructions</div>
 			</aside>
@@ -30,9 +30,9 @@
 		<!-- Container for the main game window -->
 		<main class="brdr-2px brdr-outset-grey clear-floats margin-auto width-85-pct">
 			<div class="bg-color-blue color-white width-100-pct">Instructions</div>
-			<div class="bg-color-black color-white">Target word: <span id="targetWordDisplay"> </span></div>
-			<div class="bg-color-black color-white">Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
-			<div class="bg-color-black color-white">Chances left: <span id="chancesDisplay">5</span></div>
+			<div class="bg-color-black color-white font-monospace">Target word: <span id="targetWordDisplay"> </span></div>
+			<div class="bg-color-black color-white font-monospace">Letters guessed: <span id="guessesDisplay">[Type any key to get started.]</span><span class="blinking-cursor">|</span></div>
+			<div class="bg-color-black color-white font-monospace">Chances left: <span id="chancesDisplay">7</span></div>
 		</main>
 
 		<!-- Error PopUp -->
@@ -75,7 +75,7 @@
 		var guessedLettersArray = [];
 
 		//Set the initial number of chances (incorrect guesses) the user is allowed.
-		var tracker = 5;
+		var tracker = 7;
 
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
@@ -86,7 +86,7 @@
 			var latestGuessedLetter = event.key;
 		    	//Check to see if user input is a letter before moving on.
 		    	if (event.keyCode >= 65 && event.keyCode <= 90) {
-		    		//Check to see if the user has already lost, display error message and break out of loop
+		    		//Check to see if the user has already lost, display losing message popUp and break out of loop
 		    		if(tracker === 0){
 		    			popUpText.textContent = ("ＹＯＵ ＡＬＲＥＡＤＹ ＬＯＳＴ");
 		    			popUpWindow.style.display = "block";
@@ -110,15 +110,24 @@
 		    			targetWordArrayPrint.textContent = targetWordArray.join("");
 		    		}
 
-		    		//Check if user has run out of chances. If so, alert losing message and break out.
+		    		//Check if user has run out of chances. If so, display losing message popUp and break out.
 	    			if(tracker === 0){
 	    				popUpText.textContent = ("ＹＯＵ ＬＯＳＴ");
 		    			popUpWindow.style.display = "block";
 	    				return;
 	    			}
+
+	    			//Check if user has won. If so, display winning message popUp and break out.
+	    			/*
+	    			if (){
+						popUpText.textContent = ("ＹＯＵ ＷＯＮ.<br>ＲＥＪＯＩＣＥ, ＲＥＪＯＩＣＥ, ＲＥＪＯＩＣＥ.");
+		    			popUpWindow.style.display = "block";
+	    				return;
+	    			}
+	    			*/
 				}
 
-				//Display alert message if user input is not a letter.
+				//Display warning popUp if user input is not a letter.
 		    	else {
 		    		popUpText.textContent = ("ＬＥＴＴＥＲＳ　ＯＮＬＹ　，　ＰＬＥＡＳＥ");
 		    		popUpWindow.style.display = "block";

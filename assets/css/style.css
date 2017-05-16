@@ -98,7 +98,11 @@ border-width: 2px;
 
 .flt-rt{
   float: right;
-} 
+}
+
+.font-monospace{
+  font-family: "Lucida Console", Monaco, monospace;
+}
 
 .height-30-px{
   height: 30px;
@@ -108,12 +112,12 @@ border-width: 2px;
   margin: auto;
 }
 
-.marginbottom-60px{
-  margin-bottom: 60px;
+.marginbottom-40px{
+  margin-bottom: 40px;
 }
 
-.margintop-60px{
-  margin-top: 60px;
+.margintop-40px{
+  margin-top: 40px;
 }
 
 .popUp {
