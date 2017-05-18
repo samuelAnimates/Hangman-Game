@@ -2,29 +2,35 @@
 <html>
 
 <head>
+	<title>Vaporwave Hangman</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 
 	<!-- On-theme dictionary file consisting only of an array named "dictionary" -->
-	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>
-	<title>Vaporwave Hangman</title>
+	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>	
 </head>
 
-<body class="bg-beach-wallpaper" onload="playGame()">
-	<!-- Container for the whole page body  -->
+<body onload="playGame()">
+	
+	<!-- Fullpage background wallpaper -->
+	<div id="bg">
+		<img src="./assets/images/wallpaper.jpg" alt="background image">
+	</div>
+
+	<!-- Container for all the screen elements -->
 	<div class="margin-auto margintop-40px width-85-pct">
 
 		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-100-pct">
 			<aside class = "brdr-2px brdr-outset-grey flt-lft outsetborder-grey width-60-pct">
-				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Game Title</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px pad-2px width-100-pct">Game Title</div>
 				<div class="bg-color-grey pad-2px width-100-pct">VAPORWAVE HANGMAN</div>
 			</aside>
 
 			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-24px outsetborder-grey width-35-pct">
-				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Did you know...</div>
-				<div class="bg-color-grey font-size-14px pad-8px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px font-weight-lighter pad-2px width-100-pct">Did you know...</div>
+				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-8px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
 			</aside>
 		</div>
 
@@ -33,14 +39,14 @@
 
 			<!-- Top row window to display game stats -->
 			<main class="brdr-2px brdr-outset-grey clear-floats margin-auto marginbottom-24px width-100-pct">
-				<div class="bg-color-blue font-size-14px color-white pad-2px width-100-pct">Instructions</div>
+				<div class="bg-color-blue font-sans font-size-14px color-white pad-2px width-100-pct">Instructions</div>
 				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px" id="targetWordDisplay"> </span>&nbsp;</div>
 				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
 			</main>
 			
 			<!-- Bottom row lefthand window to display guesses and cursor -->
 			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-35-pct">
-				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Instructions</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px pad-2px width-100-pct">Instructions</div>
 				<div class="bg-color-black color-green font-monospace font-size-12px pad-2px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
 			</main>
 
@@ -56,7 +62,7 @@
 
 	</div>
 
-	<footer class="bg-color-grey height-30-px position-fixed-bottom width-100-pct"> 1</footer>
+	<footer class="bg-color-grey height-40-px position-fixed-bottom width-100-pct"> 1</footer>
 
 	<script>
 
