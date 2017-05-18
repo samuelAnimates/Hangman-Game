@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
+
 	<!-- On-theme dictionary file consisting only of an array named "dictionary" -->
 	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>
 	<title>Vaporwave Hangman</title>
@@ -17,29 +18,30 @@
 		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-100-pct">
 			<aside class = "brdr-2px brdr-outset-grey flt-lft outsetborder-grey width-60-pct">
-				<div class="bg-color-blue color-white width-100-pct">Game Title</div>
-				<div class="bg-color-grey width-100-pct">VAPORWAVE HANGMAN</div>
+				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Game Title</div>
+				<div class="bg-color-grey pad-2px width-100-pct">VAPORWAVE HANGMAN</div>
 			</aside>
 
 			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-24px outsetborder-grey width-35-pct">
-				<div class="bg-color-blue color-white width-100-pct">Did you know...</div>
-				<div class="bg-color-grey font-size-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the TARGET WORD without running out of CHANCES.<br><br>Type any key to get started.</div>
+				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Did you know...</div>
+				<div class="bg-color-grey font-size-14px pad-8px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
 			</aside>
 		</div>
 
 		<!-- Container for the main game components -->
 		<div class="margin-auto width-100-pct">
+
 			<!-- Top row window to display game stats -->
 			<main class="brdr-2px brdr-outset-grey clear-floats margin-auto marginbottom-24px width-100-pct">
-				<div class="bg-color-blue color-white width-100-pct">Instructions</div>
-				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px" id="targetWordDisplay"> </span>&nbsp;</div>
-				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
+				<div class="bg-color-blue font-size-14px color-white pad-2px width-100-pct">Instructions</div>
+				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px" id="targetWordDisplay"> </span>&nbsp;</div>
+				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
 			</main>
 			
 			<!-- Bottom row lefthand window to display guesses and cursor -->
 			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-35-pct">
-				<div class="bg-color-blue color-white width-100-pct">Instructions</div>
-				<div class="bg-color-black color-green font-monospace font-size-12px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
+				<div class="bg-color-blue color-white font-size-14px pad-2px width-100-pct">Instructions</div>
+				<div class="bg-color-black color-green font-monospace font-size-12px pad-2px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
 			</main>
 
 			<!-- Error PopUp -->
@@ -63,7 +65,7 @@
 			var targetWord = dictionary[getRandomIntInclusive(0, (dictionary.length - 1))];
 			console.log(targetWord);
 
-			//Get elements from html to display the user's guessed letters, and remaining chances.
+			//Get elements from html to display the user's guessed letters and remaining chances.
 			var guessedLetters = document.getElementById("guessesDisplay");
 			var trackerPrint = document.getElementById("chancesDisplay");
 
@@ -71,7 +73,7 @@
 			var targetWordArray = [];
 			var targetWordArrayPrint = document.getElementById("targetWordDisplay");
 
-			//Set variable for end-game check.
+			//Set variable for end-game win condition.
 			var winGame = false;
 
 			//Prepare pop-up window
@@ -79,6 +81,7 @@
 			var span = document.getElementsByClassName("popUpClose")[0];
 			var popUpText = document.getElementById("popUpMessage");
 
+			//Print the target word and any blank spaces to the page
 			for (i = 0; i < targetWord.length; i++){
 				targetWordArray.push(" _ ")
 			}
@@ -101,14 +104,14 @@
 
 			    //Check to see if the user has already lost, display losing message popUp and break out of loop
 	    		if(tracker === 0){
-	    			popUpText.textContent = ("ＹＯＵ ＡＬＲＥＡＤＹ ＬＯＳＴ");
+	    			popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｌ Ｏ Ｓ Ｔ.");
 	    			popUpWindow.style.display = "block";
 	    			return;
 	    		}
 
 	    		//Check if user has won. If so, display winning message popUp and break out.
     			else if (winGame == true){
-					popUpText.textContent = ("ＹＯＵ ＷＯＮ.<br>ＲＥＪＯＩＣＥ, ＲＥＪＯＩＣＥ, ＲＥＪＯＩＣＥ.");
+					popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｗ Ｏ Ｎ.");
 	    			popUpWindow.style.display = "block";
     				return;
     			}
@@ -129,25 +132,39 @@
 			    		if (indicesAndTargetWordObject.letterNumber < 0) {
 			    			tracker--;
 			    			trackerPrint.textContent = tracker;
+
+			    			//Then check to see if the user has lost. If so, display losing message popUp and break out.
+			    			if(tracker === 0){
+			    				popUpText.textContent = ("ＹＯＵ ＬＯＳＴ");
+				    			popUpWindow.style.display = "block";
+			    				return;
+		    				}
 			    		}
 			    		
 			    		//Otherwise, print the new contents of the target word array	
 			    		else{
 			    			targetWordArrayPrint.textContent = targetWordArray.join("");
+
+			    			//Then, check to see if the user has won. If so, display winning message popUp and break out.
+			    			var blankSpaceCount = 0; 
+			    			for (i = 0; i < targetWordArray.length; i++){
+			    				if (targetWordArray[i] == " _ "){
+			    					blankSpaceCount++;
+			    				}
+			    			}
+
+			    			if (blankSpaceCount == 0){
+			    				winGame = true;
+			    				popUpText.textContent = ("ＹＯＵ  ＷＯＮ. Ｒ Ｅ Ｊ Ｏ Ｉ Ｃ Ｅ.");
+				    			popUpWindow.style.display = "block";
+			    				return;
+			    			}
 			    		}
-
-			    		//Check if user has run out of chances. If so, display losing message popUp and break out.
-		    			if(tracker === 0){
-		    				popUpText.textContent = ("ＹＯＵ ＬＯＳＴ");
-			    			popUpWindow.style.display = "block";
-		    				return;
-		    			}
-
 					}
 
 					//Display warning popUp if user input is not a letter.
 			    	else {
-			    		popUpText.textContent = ("ＬＥＴＴＥＲＳ　ＯＮＬＹ　，　ＰＬＥＡＳＥ");
+			    		popUpText.textContent = ("ＬＥＴＴＥＲＳ 　ＯＮＬＹ，　ＰＬＥＡＳＥ");
 			    		popUpWindow.style.display = "block";
 			    		return;
 			    	}
