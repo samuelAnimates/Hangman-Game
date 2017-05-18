@@ -24,13 +24,13 @@
 		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-100-pct">
 			<aside class = "brdr-2px brdr-outset-grey flt-lft outsetborder-grey width-60-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px pad-2px width-100-pct">Game Title</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">Game Title<div class="bg-color-grey brdr-1px brdr-outset-grey color-lightgrey disp-table flt-rt"><div class="align-vert-mid disp-table-cell">&nbsp;x&nbsp;</div></div></div>
 				<div class="bg-color-grey pad-2px width-100-pct">VAPORWAVE HANGMAN</div>
 			</aside>
 
 			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-24px outsetborder-grey width-35-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px font-weight-lighter pad-2px width-100-pct">Did you know...</div>
-				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-8px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px font-weight-lighter height-20-px pad-2px width-100-pct">Did you know...<div class="bg-color-grey brdr-1px brdr-outset-grey color-lightgrey flt-rt">&nbsp;x&nbsp;</div></div>
+				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
 			</aside>
 		</div>
 
@@ -38,24 +38,25 @@
 		<div class="margin-auto width-100-pct">
 
 			<!-- Top row window to display game stats -->
-			<main class="brdr-2px brdr-outset-grey clear-floats margin-auto marginbottom-24px width-100-pct">
-				<div class="bg-color-blue font-sans font-size-14px color-white pad-2px width-100-pct">Instructions</div>
+			<main class="brdr-2px brdr-outset-grey clear-floats margin-auto marginbottom-24px width-60-pct">
+				<div class="bg-color-blue font-sans font-size-14px color-white height-20-px pad-2px width-100-pct">Instructions<div class="bg-color-grey brdr-1px brdr-outset-grey color-lightgrey flt-rt">&nbsp;x&nbsp;</div></div>
 				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px" id="targetWordDisplay"> </span>&nbsp;</div>
 				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
 			</main>
 			
 			<!-- Bottom row lefthand window to display guesses and cursor -->
-			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-35-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px pad-2px width-100-pct">Instructions</div>
+			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-45-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">Instructions <div class="bg-color-grey brdr-1px brdr-outset-grey color-lightgrey flt-rt">&nbsp;x&nbsp;</div></div>
 				<div class="bg-color-black color-green font-monospace font-size-12px pad-2px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
 			</main>
 
 			<!-- Error PopUp -->
-			<div id="myPopUp" class="popUp">
-				<div class="popUpContent">
-					<span class="popUpClose">&times;</span>
-					<p id="popUpMessage"> </p>
-				</div>
+			<div id="myPopUp" class="brdr-2px brdr-outset-grey popUp">
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ERROR <div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey color-black">&nbsp;x&nbsp;</div>
+					</div>
+					<div class="bg-color-grey font-sans font-size-14px font-weight-lighter height-100pct pad-16px width-100-pct">
+						<p id="popUpMessage"> </p>
+					</div>
 			</div>
 
 		</div>
