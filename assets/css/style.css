@@ -229,11 +229,14 @@
     font-weight: bold;
 }
 
-.popUpClose:hover,
+.popUpClose:hover{
+  border-style: inset;
+  cursor: pointer;
+}
+
 .popUpClose:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  border-style: inset;
 }
 
 .position-fixed-bottom{
