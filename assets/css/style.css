@@ -72,9 +72,6 @@
   }
 }
 
-.align-vert-mid{
-  vertical-align: middle;
-}
 
 .bg-color-black{
   background-color: black;
@@ -112,6 +109,10 @@
   border-color: #a6a6a6;
 }
 
+.center-text{
+  text-align: center;
+}
+
 .clear-floats{
   clear: both;
 }
@@ -130,14 +131,6 @@
 
 .color-white{
   color: white;
-}
-
-.disp-table{
-  display: table;
-}
-
-.disp-table-cell{
-  display: table-cell;
 }
 
 .flt-lft{
@@ -171,6 +164,10 @@
 .font-weight-lighter{
   font-weight: lighter;
 } 
+
+.height-16-px{
+  height: 16px;
+}
 
 .height-20-px{
   height: 20px;
@@ -246,6 +243,10 @@
 
 .width-auto{
   width: auto;
+}
+
+.width-16-px{
+  width: 16px;
 }
 
 .width-20-pct{
