@@ -167,11 +167,12 @@
 				    return;
 				}
 
-				//Check to see if the user has already lost, display losing message popUp and break out of loop
+				//Check to see if the user has already lost, display losing message popUp and break out of loop.
 	    		else if(tracker === 0){
 	    			popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｌ Ｏ Ｓ Ｔ.");
 	    			popUpWindow.style.display = "block";
 	    			isOpen = true;
+	    			window.location.reload();
 	    			return;
 	    		}
 
@@ -180,6 +181,7 @@
 					popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｗ Ｏ Ｎ.");
 	    			popUpWindow.style.display = "block";
 	    			isOpen = true;
+	    			window.location.reload();
     				return;
     			}
 
@@ -214,6 +216,7 @@
 			    				popUpText.textContent = ("ＹＯＵ  ＬＯＳＴ.");
 				    			popUpWindow.style.display = "block";
 				    			isOpen = true;
+				    			window.location.reload();
 			    				return;
 		    				}
 			    		}
@@ -235,6 +238,7 @@
 			    				popUpText.textContent = ("ＹＯＵ  ＷＯＮ...  Ｒ Ｅ Ｊ Ｏ Ｉ Ｃ Ｅ.");
 				    			popUpWindow.style.display = "block";
 				    			isOpen = true;
+				    			window.location.reload();
 			    				return;
 			    			}
 			    		}
