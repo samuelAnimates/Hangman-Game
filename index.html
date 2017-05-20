@@ -5,21 +5,20 @@
 	<title>Vaporwave Hangman</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 
 	<!-- On-theme dictionary file consisting only of an array named "dictionary" -->
 	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>	
 </head>
 
-<body onload="playGame()">
+<body onload="playGame(), resizeBg()" onresize="resizeBg()">
 	
 	<!-- Fullpage background wallpaper -->
-	<div id="bg">
-		<img src="./assets/images/wallpaper.jpg" alt="background image">
-	</div>
+	<img src="./assets/images/wallpaper.jpg" id="bg" alt="background image">
 
 	<!-- Container for all the screen elements -->
-	<div class="margin-auto margintop-40px width-85-pct">
+	<div class="margin-auto margintop-40px width-80-pct">
 
 		<!-- Container for the toprow of windows: title and instructions  -->
 		<div class="margin-auto width-100-pct">
@@ -32,7 +31,7 @@
 
 			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-24px outsetborder-grey width-35-pct">
 				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">DID YOU KNOW...<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px width-16-px">x</div></div>
-				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white">TARGET WORD</span> without running out of <span class="bg-color-blue color-white">CHANCES</span><br><br>Type any letter key to make your first guess.</div>
+				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white font-monospace font-size-12px">TARGET WORD</span> without running out of <span class="bg-color-blue color-white font-monospace font-size-12px">CHANCES</span>.<br><br>Type any letter key to make your first guess.</div>
 			</aside>
 		</div>
 
@@ -54,7 +53,7 @@
 
 			<!-- Error PopUp -->
 			<div id="myPopUp" class="brdr-2px brdr-outset-grey popUp">
-					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ERROR<div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey center-text color-black flt-rt height-16-px width-16-px">&nbsp;x&nbsp;</div>
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ALERT<div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey center-text color-black flt-rt height-16-px width-16-px">&nbsp;x&nbsp;</div>
 					</div>
 					<div class="bg-color-grey font-sans font-size-14px font-weight-lighter height-100pct pad-16px width-100-pct">
 						<p id="popUpMessage"> </p>
@@ -65,14 +64,37 @@
 
 	</div>
 
-	<footer class="bg-color-grey height-40-px position-fixed-bottom width-100-pct"> 1</footer>
+	<footer class="bg-color-grey brdr-1px brdr-outset-grey height-40-px position-fixed-bottom width-100-pct">
+		<div class="bg-color-blue font-sans font-size-14px">
+			<div id="resetBtn" class="brdr-1px brdr-outset-grey center-text color-black flt-lft height-38-px pad-2px"> Start Over </div>
+			<div class="brdr-1px brdr-outset-grey center-text brdr-outset-grey color-lightgrey flt-rt height-38-px pad-2px"> Upgrade </div> 
+			<div class="color-lightgrey flt-rt height-38-px">&nbsp;|&nbsp;</div>
+			<div class="brdr-1px brdr-outset-grey center-text brdr-outset-grey color-lightgrey flt-rt height-38-px pad-2px"> Leave</div>
+		</div>
+	</footer>
 
 	<script>
+		//set variables and define the javascript function that resizes the background image on load and on window resize
+		var wallpaper = document.getElementById("bg")
+	    var aspectRatio = wallpaper.width / wallpaper.height; 		
+	    function resizeBg() {
+				
+			if ( (window.innerWidth / window.innerHeight) < aspectRatio ) {
+			    wallpaper.removeAttribute("class");
+			    wallpaper.className += "bgheight z-index-neg1";
+			} 
+
+			else {
+			    wallpaper.removeAttribute("class");
+			    wallpaper.className += "bgwidth z-index-neg1";
+			}
+						
+		}
+
 
 		function playGame() {
 			//Set target word that the player is trying to guess.		
 			var targetWord = dictionary[getRandomIntInclusive(0, (dictionary.length - 1))];
-			console.log(targetWord);
 
 			//Get elements from html to display the user's guessed letters and remaining chances.
 			var guessedLetters = document.getElementById("guessesDisplay");
@@ -89,6 +111,7 @@
 			var popUpWindow = document.getElementById("myPopUp");
 			var span = document.getElementsByClassName("popUpClose")[0];
 			var popUpText = document.getElementById("popUpMessage");
+			var isOpen;
 
 			//Print the target word and any blank spaces to the page
 			for (i = 0; i < targetWord.length; i++){
@@ -103,18 +126,33 @@
 			//Set the initial number of chances (incorrect guesses) the user is allowed.
 			var tracker = 7;
 
-			// When the user clicks on <span> (x), close the modal
+			// When the user clicks on the Start Over button, refresh the page.
+			var refreshBtn = document.getElementById("resetBtn");
+				refreshBtn.onclick = function() {
+				    window.location.reload();
+			}
+
+			// When the user clicks on <span> (x), close the popUp
 			span.onclick = function() {
-			    popUpWindow.style.display = "none";
-			}		
+				    popUpWindow.style.display = "none";
+				    isOpen = false;
+			}
 
 			document.onkeydown = function(event) {
 				var latestGuessedLetter = event.key;
 
-			    //Check to see if the user has already lost, display losing message popUp and break out of loop
-	    		if(tracker === 0){
+			    //if an alert popup is open, pressing ENTER will close it
+	    		if(isOpen == true && event.keyCode == 13){
+				    popUpWindow.style.display = "none";
+				    isOpen = false;
+				    return;
+				}
+
+				//Check to see if the user has already lost, display losing message popUp and break out of loop
+	    		else if(tracker === 0){
 	    			popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｌ Ｏ Ｓ Ｔ.");
 	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
 	    			return;
 	    		}
 
@@ -122,6 +160,15 @@
     			else if (winGame == true){
 					popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｗ Ｏ Ｎ.");
 	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
+    				return;
+    			}
+
+    			//Check if user has already guessed the letter they entered. If so, display error popUp and break out.
+    			else if (isInArray(guessedLettersArray, latestGuessedLetter)){
+    				popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  ＧＵＥＳＳＥＤ. ＴＨＡＴ.  ＬＥＴＴＥＲ.");
+	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
     				return;
     			}
 
@@ -130,6 +177,7 @@
 
 			    	//Check to see if user input is a letter before moving on.
 			    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+
 			    		/*Call pushAndPrintString function to take in the letter.
 			    		Push it to the array of guessed letters, and print it to the "guessedLetters" html element*/
 			    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
@@ -144,8 +192,9 @@
 
 			    			//Then check to see if the user has lost. If so, display losing message popUp and break out.
 			    			if(tracker === 0){
-			    				popUpText.textContent = ("ＹＯＵ ＬＯＳＴ");
+			    				popUpText.textContent = ("ＹＯＵ  ＬＯＳＴ.");
 				    			popUpWindow.style.display = "block";
+				    			isOpen = true;
 			    				return;
 		    				}
 			    		}
@@ -164,15 +213,16 @@
 
 			    			if (blankSpaceCount == 0){
 			    				winGame = true;
-			    				popUpText.textContent = ("ＹＯＵ  ＷＯＮ. Ｒ Ｅ Ｊ Ｏ Ｉ Ｃ Ｅ.");
+			    				popUpText.textContent = ("ＹＯＵ  ＷＯＮ...  Ｒ Ｅ Ｊ Ｏ Ｉ Ｃ Ｅ.");
 				    			popUpWindow.style.display = "block";
+				    			isOpen = true;
 			    				return;
 			    			}
 			    		}
 					}
 
-					//Display warning popUp if user input is not a letter.
-			    	else {
+					//Display warning popUp if user input is not a letter, except for ENTER key.
+			    	else if (event.keyCode !== 13){
 			    		popUpText.textContent = ("ＬＥＴＴＥＲＳ 　ＯＮＬＹ，　ＰＬＥＡＳＥ");
 			    		popUpWindow.style.display = "block";
 			    		return;
