@@ -24,13 +24,13 @@
 		<div class="margin-auto width-100-pct">
 			<aside class = "brdr-2px brdr-outset-grey flt-lft outsetborder-grey width-60-pct">
 				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">GAME TITLE
-					<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px width-16-px">x</div>
+					<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div>
 				</div>
-				<div class="bg-color-grey pad-2px width-100-pct">VAPORWAVE HANGMAN</div>
+				<div class="bg-color-grey pad-2px width-100-pct"><img src="./assets/images/title.jpg" class="width-100-pct" alt="'Vaporwave Hangman' title card"></div>
 			</aside>
 
-			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-24px outsetborder-grey width-35-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">DID YOU KNOW...<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px width-16-px">x</div></div>
+			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-40px outsetborder-grey width-35-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">DID YOU KNOW...<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div></div>
 				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white font-monospace font-size-12px">TARGET WORD</span> without running out of <span class="bg-color-blue color-white font-monospace font-size-12px">CHANCES</span>.<br><br>Type any letter key to make your first guess.</div>
 			</aside>
 		</div>
@@ -38,22 +38,31 @@
 		<!-- Container for the main game components -->
 		<div class="margin-auto width-100-pct">
 
-			<!-- Top row window to display game stats -->
+			<!-- window to display game stats -->
 			<main class="brdr-2px brdr-outset-grey clear-floats margin-auto marginbottom-24px width-60-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">GAME STATS<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px width-16-px">x</div></div>
-				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px" id="targetWordDisplay"> </span>&nbsp;</div>
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">GAME STATS<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div></div>
+				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px " id="targetWordDisplay"> </span>&nbsp;</div>
 				<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
 			</main>
 			
-			<!-- Bottom row lefthand window to display guesses and cursor -->
-			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-45-pct">
-				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ENTER GUESSES HERE<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px width-16-px">x</div></div>
+			<!-- window to display guesses and cursor -->
+			<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-60-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ENTER GUESSES HERE<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px vert-align-mid">x</div></div>
 				<div class="bg-color-black color-green font-monospace font-size-12px pad-2px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
 			</main>
 
+			<!-- decorative image -->
+			<aside class = "brdr-2px brdr-outset-grey flt-rt outsetborder-grey width-20-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">NO HINTS
+					<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div>
+				</div>
+				<div class="bg-color-grey pad-2px width-100-pct"><img src="./assets/images/moon.gif" class="width-100-pct" alt="decorative gif of moon spinning"></div>
+			</aside>
+
+
 			<!-- Error PopUp -->
 			<div id="myPopUp" class="brdr-2px brdr-outset-grey popUp">
-					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ALERT<div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey center-text color-black flt-rt height-16-px width-16-px">&nbsp;x&nbsp;</div>
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ALERT<div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey center-text color-black flt-rt height-16-px width-16-px">x</div>
 					</div>
 					<div class="bg-color-grey font-sans font-size-14px font-weight-lighter height-100pct pad-16px width-100-pct">
 						<p id="popUpMessage"> </p>
@@ -64,14 +73,9 @@
 
 	</div>
 
-	<footer class="bg-color-grey brdr-1px brdr-outset-grey height-40-px position-fixed-bottom width-100-pct">
-		<div class="bg-color-blue font-sans font-size-14px line-height-30px">
-			<div id="resetBtn" class="brdr-1px brdr-outset-grey center-text color-black flt-lft height-38-px pad-2px"> Start Over </div>
-			<div class="color-lightgrey flt-lft font-size-30px font-weight-lighter height-38-px">|</div>
-			<div class="brdr-1px brdr-outset-grey center-text brdr-outset-grey color-lightgrey flt-rt height-38-px pad-2px"> Upgrade </div> 
-			<div class="color-lightgrey flt-rt font-size-30px font-weight-lighter height-38-px">|</div>
-			<div class="brdr-1px brdr-outset-grey center-text brdr-outset-grey color-lightgrey flt-rt height-38-px pad-2px"> Leave</div>
-		</div>
+	<footer class="bg-color-grey brdr-1px brdr-outset-grey font-sans height-40-px line-height-30px position-fixed-bottom width-100-pct">
+		<div id="resetBtn" class="brdr-1px brdr-outset-grey center-text color-black flt-lft font-size-14px height-38-px pad-2px"> Start Over </div>
+		<div class="color-lightgrey flt-t font-size-30px font-weight-lighter height-38-px">|</div>
 	</footer>
 
 	<script>
@@ -140,7 +144,7 @@
 			}
 
 			document.onkeydown = function(event) {
-				var latestGuessedLetter = event.key;
+				var latestGuessedLetter = event.key.toLowerCase();
 
 			    //if an alert popup is open, pressing ENTER will close it
 	    		if(isOpen == true && event.keyCode == 13){

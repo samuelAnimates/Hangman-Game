@@ -184,6 +184,10 @@ We'll see if I still think that was a good idea the next time I look at this cod
   height: 100%;
 }
 
+.line-height-10px{
+  line-height: 10px;
+}
+
 .line-height-24px{
   line-height: 24px;
 }
@@ -275,36 +279,26 @@ We'll see if I still think that was a good idea the next time I look at this cod
   width: 35%;
 }
 
-.width-45-pct{
-  width: 45%;
-}
 
 .width-50-pct{
   width: 50%;
-}
-
-.width-55-pct{
-  width: 55%;
 }
 
 .width-60-pct{
   width: 60%;
 }
 
+
 .width-80-pct{
   width: 80%;
-}
-
-.width-85-pct{
-  width: 85%;
 }
 
 .width-100-pct{
   width: 100%;
 }
 
-width-385-px{
-  width: 385px;
+.vert-align-mid{
+  vertical-align: middle;
 }
 
 .z-index-neg1{
