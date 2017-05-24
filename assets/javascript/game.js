@@ -11,14 +11,40 @@ function checkLetterInWord(letter, word, wordArray){
     		result.letterNumber = letterNumber;
     	}
     return result;
-}
+};
 
 //function that picks a random integer between min and max (inclusive)
 function getRandomIntInclusive(min, max) {
         	min = Math.ceil(min);
         	max = Math.floor(max);
         	return Math.floor(Math.random() * (max - min + 1)) + min;
-      	}
+};
+
+
+function initializeGame(){
+	//Set target word that the player is trying to guess.		
+	targetWord = dictionary[getRandomIntInclusive(0, (dictionary.length - 1))];
+	
+
+	//fill array with empty letter spaces to be filled in by the user, and display it onscreen.
+	targetWordArray = [];
+
+	//empty the array that will hold the user's guesses. & print it to the screen
+	guessedLettersArray = [];
+	guessedLetters.textContent = guessedLettersArray;
+	
+
+	//Set variable for end-game win condition
+	winGame = false;
+
+	for (i = 0; i < targetWord.length; i++){
+				targetWordArray.push(" _ ")
+			}
+	targetWordArrayPrint.textContent = targetWordArray.join("");
+	tracker = 7;
+	trackerPrint.textContent = tracker;
+
+};
 
 //function that checks whether an element is already present in a target array
 function isInArray(targetArray, newElement){
@@ -31,7 +57,7 @@ function isInArray(targetArray, newElement){
 			return false;
 		}
 	}
-}
+};
 
 //function that takes in an object, pushes it to an existing array, and adds the resulting array to the HTML of an onscreen element.
 function pushAndPrintString(string1, array1, htmlElementVariable){		
@@ -39,4 +65,18 @@ function pushAndPrintString(string1, array1, htmlElementVariable){
 	array1.push(string1);
 	//Display latest guess on the page
 	htmlElementVariable.textContent = array1;
-}
+};
+
+ function resizeBg() {
+				
+	if ( (window.innerWidth / window.innerHeight) < aspectRatio ) {
+	    wallpaper.removeAttribute("class");
+	    wallpaper.className += "bgheight z-index-neg1";
+	} 
+
+	else {
+	    wallpaper.removeAttribute("class");
+	    wallpaper.className += "bgwidth z-index-neg1";
+	}
+				
+};

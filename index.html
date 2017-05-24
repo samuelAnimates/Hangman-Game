@@ -46,6 +46,7 @@
 					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">GAME STATS<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div></div>
 					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px " id="targetWordDisplay"> </span>&nbsp;</div>
 					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
+					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">WINS: </span>&#62; &nbsp;<span class="color-white font-size-16px" id="winsDisplay">0</span>&nbsp;</div>
 				</main>
 
 				<!-- window to display guesses and cursor -->
@@ -96,59 +97,44 @@
 		//set variables and define the javascript function that resizes the background image on load and on window resize
 		var wallpaper = document.getElementById("bg")
 	    var aspectRatio = wallpaper.width / wallpaper.height; 		
-	    function resizeBg() {
-				
-			if ( (window.innerWidth / window.innerHeight) < aspectRatio ) {
-			    wallpaper.removeAttribute("class");
-			    wallpaper.className += "bgheight z-index-neg1";
-			} 
+	   
+		//Set target word that the player is trying to guess.		
+		var targetWord = null;
 
-			else {
-			    wallpaper.removeAttribute("class");
-			    wallpaper.className += "bgwidth z-index-neg1";
-			}
-						
-		}
+		//Get elements from html to display the user's guessed letters, remaining chances and wins.
+		var guessedLetters = guessedLetters = document.getElementById("guessesDisplay");
+		var trackerPrint = document.getElementById("chancesDisplay");
+		var winsPrint = document.getElementById("winsDisplay");
 
+		//Set and fill an array with empty letter spaces to be filled in by the user, and display it onscreen.
+		var targetWordArray = null;
+		var targetWordArrayPrint = document.getElementById("targetWordDisplay");
+
+		//Set variable for end-game win condition and wins tracker
+		var winGame = null;
+		var winTrackerNum = 0;
+
+		var guessedLettersArray = [];
+		var tracker = 0;
 
 		function playGame() {
-			//Set target word that the player is trying to guess.		
-			var targetWord = dictionary[getRandomIntInclusive(0, (dictionary.length - 1))];
+			
 
-			//Get elements from html to display the user's guessed letters and remaining chances.
-			var guessedLetters = document.getElementById("guessesDisplay");
-			var trackerPrint = document.getElementById("chancesDisplay");
-
-			//Set and fill an array with empty letter spaces to be filled in by the user, and display it onscreen.
-			var targetWordArray = [];
-			var targetWordArrayPrint = document.getElementById("targetWordDisplay");
-
-			//Set variable for end-game win condition.
-			var winGame = false;
+			initializeGame();
 
 			//Prepare pop-up window
 			var popUpWindow = document.getElementById("myPopUp");
 			var span = document.getElementsByClassName("popUpClose")[0];
 			var popUpText = document.getElementById("popUpMessage");
 			var isOpen;
-
-			//Print the target word and any blank spaces to the page
-			for (i = 0; i < targetWord.length; i++){
-				targetWordArray.push(" _ ")
-			}
-			targetWordArrayPrint.textContent = targetWordArray.join("");
 			
 			
-			//Set the array into which the user's guessed letters will be stored.
-			var guessedLettersArray = [];
-
-			//Set the initial number of chances (incorrect guesses) the user is allowed.
-			var tracker = 7;
 
 			// When the user clicks on the Start Over button, refresh the page.
 			var refreshBtn = document.getElementById("resetBtn");
 				refreshBtn.onclick = function() {
-				    window.location.reload();
+					winTrackerNum++;
+					initializeGame();
 			}
 
 			// When the user clicks on <span> (x), close the popUp
@@ -172,7 +158,6 @@
 	    			popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｌ Ｏ Ｓ Ｔ.");
 	    			popUpWindow.style.display = "block";
 	    			isOpen = true;
-	    			window.location.reload();
 	    			return;
 	    		}
 
@@ -181,7 +166,6 @@
 					popUpText.textContent = ("ＹＯＵ.  ＡＬＲＥＡＤＹ.  Ｗ Ｏ Ｎ.");
 	    			popUpWindow.style.display = "block";
 	    			isOpen = true;
-	    			window.location.reload();
     				return;
     			}
 
@@ -216,7 +200,6 @@
 			    				popUpText.textContent = ("ＹＯＵ  ＬＯＳＴ.");
 				    			popUpWindow.style.display = "block";
 				    			isOpen = true;
-				    			window.location.reload();
 			    				return;
 		    				}
 			    		}
@@ -237,8 +220,9 @@
 			    				winGame = true;
 			    				popUpText.textContent = ("ＹＯＵ  ＷＯＮ...  Ｒ Ｅ Ｊ Ｏ Ｉ Ｃ Ｅ.");
 				    			popUpWindow.style.display = "block";
+				    			winTrackerNum++;
+				    			winsPrint.textContent = winTrackerNum;
 				    			isOpen = true;
-				    			window.location.reload();
 			    				return;
 			    			}
 			    		}
