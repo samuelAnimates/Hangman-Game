@@ -6,12 +6,7 @@ First experiment with making an interactive web app, using vanilla javascript: a
 
 ## Getting Started
 
-Simply download the repo and open the html page in a browser
-
-## Built With
-
-* [Bootstrap](https://getbootstrap.com/docs/3.3/)
-* [jQuery](https://jquery.com) 
+Simply download the repo and open the html page in a browser, or visit this [Github Page](https://smendez92.github.io/Hangman-Game/).
 
 ## Author
 
